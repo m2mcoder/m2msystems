@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30110.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "M2MSystems.Database", "M2MSystems.Database\M2MSystems.Database.csproj", "{BA342599-A394-488C-9674-14474B5792C1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "M2MSystems.Insurance.WebService", "M2MSystems.Insurance.WebService\M2MSystems.Insurance.WebService.csproj", "{49A0C6CB-3429-42C3-850B-7789214D668C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BA342599-A394-488C-9674-14474B5792C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA342599-A394-488C-9674-14474B5792C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA342599-A394-488C-9674-14474B5792C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA342599-A394-488C-9674-14474B5792C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49A0C6CB-3429-42C3-850B-7789214D668C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49A0C6CB-3429-42C3-850B-7789214D668C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49A0C6CB-3429-42C3-850B-7789214D668C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49A0C6CB-3429-42C3-850B-7789214D668C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 14, 12.75" name="M2MSystems">
+  <DataContextMoniker Name="/M2MSystemsDataContext" />
+  <nestedChildShapes>
+    <classShape Id="5970b393-b63b-40ee-b30e-030ffcdc8a47" absoluteBounds="9, 8.5, 2, 2.9247054036458309">
+      <DataClassMoniker Name="/M2MSystemsDataContext/Applicant" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e8b4840f-8c27-4d1d-af35-aead7d167eb9" absoluteBounds="9.015, 8.96, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="2b176cf7-4e23-4434-a6fe-47b782ffa74a" absoluteBounds="0.75, 4, 2, 1.9631982421875">
+      <DataClassMoniker Name="/M2MSystemsDataContext/Document" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0328a2de-0fb9-45e3-9dcc-c306f11b4c5f" absoluteBounds="0.765, 4.46, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="b7708926-aa1e-4585-88c6-5b8b1498b092" absoluteBounds="9, 3.875, 2, 2.155499674479167">
+      <DataClassMoniker Name="/M2MSystemsDataContext/Form" />
+      <nestedChildShapes>
+        <elementListCompartment Id="188a6c14-e4d0-4257-bca6-3c0310697da4" absoluteBounds="9.015, 4.335, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="70e8f777-3147-4538-b790-e5e1ca40a186" absoluteBounds="9, 0.75, 2, 2.3478011067708335">
+      <DataClassMoniker Name="/M2MSystemsDataContext/InsurerPartnerProduct" />
+      <nestedChildShapes>
+        <elementListCompartment Id="15c81092-9cfb-45b2-b082-719d4f7afb97" absoluteBounds="9.015, 1.21, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="09462cec-17c3-40eb-b2ab-70380f42229c" absoluteBounds="6.25, 9.125, 2, 2.3478011067708344">
+      <DataClassMoniker Name="/M2MSystemsDataContext/InsurerPartner" />
+      <nestedChildShapes>
+        <elementListCompartment Id="03298918-0c0d-4e60-acda-48503e2b370d" absoluteBounds="6.265, 9.585, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="6890964e-50a8-4def-a599-0951a3905716" absoluteBounds="3.5, 8, 2, 1.7708968098958327">
+      <DataClassMoniker Name="/M2MSystemsDataContext/Insurer" />
+      <nestedChildShapes>
+        <elementListCompartment Id="5b0096ae-19d4-481e-8123-9fbfe275371a" absoluteBounds="3.515, 8.46, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="268e5e36-07f2-4a6b-9f86-0537229a82b4" absoluteBounds="3.5, 10.5, 2, 1.9631982421874987">
+      <DataClassMoniker Name="/M2MSystemsDataContext/Partner" />
+      <nestedChildShapes>
+        <elementListCompartment Id="19258553-b739-4730-be81-448dec198f3d" absoluteBounds="3.515, 10.96, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="93437dd4-d4e0-4133-a5d6-faf1bca42a58" absoluteBounds="3.5, 3.5, 2, 2.732403971354167">
+      <DataClassMoniker Name="/M2MSystemsDataContext/Policy" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a47d685c-b455-46f8-ba08-c0970e5094b8" absoluteBounds="3.515, 3.96, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="cdb25c50-ffc4-44c9-aebf-8ba6c5e03e79" absoluteBounds="6.25, 4, 2, 1.9631982421875">
+      <DataClassMoniker Name="/M2MSystemsDataContext/Product" />
+      <nestedChildShapes>
+        <elementListCompartment Id="206b13f0-860b-4f22-857e-36858da3ddbf" absoluteBounds="6.265, 4.46, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="fe731863-94d8-4ba0-bb5a-4741fd8ba6f3" absoluteBounds="11.75, 3.625, 2, 2.5401025390625">
+      <DataClassMoniker Name="/M2MSystemsDataContext/SavedForm" />
+      <nestedChildShapes>
+        <elementListCompartment Id="3753d220-bd35-4f3a-9b09-0e83009cd7d8" absoluteBounds="11.765, 4.085, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(8.25 : 9.125); (8.625 : 8.75); (8.625 : 1.92390055338542); (9 : 1.92390055338542)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/M2MSystemsDataContext/InsurerPartner/InsurerPartner_InsurerPartnerProduct" />
+      <nodes>
+        <classShapeMoniker Id="09462cec-17c3-40eb-b2ab-70380f42229c" />
+        <classShapeMoniker Id="70e8f777-3147-4538-b790-e5e1ca40a186" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 9.44794840494792); (6.25 : 9.44794840494792)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/M2MSystemsDataContext/Insurer/Insurer_InsurerPartner" />
+      <nodes>
+        <classShapeMoniker Id="6890964e-50a8-4def-a599-0951a3905716" />
+        <classShapeMoniker Id="09462cec-17c3-40eb-b2ab-70380f42229c" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 10.9864005533854); (6.25 : 10.9864005533854)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/M2MSystemsDataContext/Partner/Partner_InsurerPartner" />
+      <nodes>
+        <classShapeMoniker Id="268e5e36-07f2-4a6b-9f86-0537229a82b4" />
+        <classShapeMoniker Id="09462cec-17c3-40eb-b2ab-70380f42229c" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 4.98159912109375); (3.5 : 4.98159912109375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/M2MSystemsDataContext/Document/Document_Policy" />
+      <nodes>
+        <classShapeMoniker Id="2b176cf7-4e23-4434-a6fe-47b782ffa74a" />
+        <classShapeMoniker Id="93437dd4-d4e0-4133-a5d6-faf1bca42a58" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.25 : 4.98159912109375); (9 : 4.98159912109375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/M2MSystemsDataContext/Product/Product_Form" />
+      <nodes>
+        <classShapeMoniker Id="cdb25c50-ffc4-44c9-aebf-8ba6c5e03e79" />
+        <classShapeMoniker Id="b7708926-aa1e-4585-88c6-5b8b1498b092" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(7.25 : 4); (7.25 : 2.54210333007812); (8.54166666666667 : 2.54210333007812 : JumpStart); (8.70833333333333 : 2.54210333007812 : JumpEnd); (9 : 2.54210333007812)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/M2MSystemsDataContext/Product/Product_InsurerPartnerProduct" />
+      <nodes>
+        <classShapeMoniker Id="cdb25c50-ffc4-44c9-aebf-8ba6c5e03e79" />
+        <classShapeMoniker Id="70e8f777-3147-4538-b790-e5e1ca40a186" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 4.98159912109375); (6.25 : 4.98159912109375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/M2MSystemsDataContext/Policy/Policy_Product" />
+      <nodes>
+        <classShapeMoniker Id="93437dd4-d4e0-4133-a5d6-faf1bca42a58" />
+        <classShapeMoniker Id="cdb25c50-ffc4-44c9-aebf-8ba6c5e03e79" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(11 : 9.96235270182292); (12.75 : 9.96235270182292); (12.75 : 6.1651025390625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/M2MSystemsDataContext/Applicant/Applicant_SavedForm" />
+      <nodes>
+        <classShapeMoniker Id="5970b393-b63b-40ee-b30e-030ffcdc8a47" />
+        <classShapeMoniker Id="fe731863-94d8-4ba0-bb5a-4741fd8ba6f3" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(11 : 4.95274983723958); (11.75 : 4.95274983723958)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/M2MSystemsDataContext/Form/Form_SavedForm" />
+      <nodes>
+        <classShapeMoniker Id="b7708926-aa1e-4585-88c6-5b8b1498b092" />
+        <classShapeMoniker Id="fe731863-94d8-4ba0-bb5a-4741fd8ba6f3" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 3.71875); (11.75 : 3.71875)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/M2MSystemsDataContext/Policy/Policy_SavedForm" />
+      <nodes>
+        <classShapeMoniker Id="93437dd4-d4e0-4133-a5d6-faf1bca42a58" />
+        <classShapeMoniker Id="fe731863-94d8-4ba0-bb5a-4741fd8ba6f3" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

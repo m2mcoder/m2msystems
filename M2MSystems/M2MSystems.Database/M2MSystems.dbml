@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="M2MSystems" Class="M2MSystemsDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="ConnectionString" ConnectionString="Data Source=.;Initial Catalog=M2MSystems;Integrated Security=True" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Applicants" Member="Applicants">
+    <Type Name="Applicant">
+      <Column Name="id" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="firstname" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="lastname" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="address1" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="address2" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="city" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="thirdpartykey" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="created" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="createdby" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="modified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="modifiedby" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Association Name="Applicant_SavedForm" Member="SavedForms" ThisKey="id" OtherKey="applicantid" Type="SavedForm" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Documents" Member="Documents">
+    <Type Name="Document">
+      <Column Name="id" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="bin" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="created" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="createdby" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="modified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="modifiedby" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Association Name="Document_Policy" Member="Policies" ThisKey="id" OtherKey="documentid" Type="Policy" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Forms" Member="Forms">
+    <Type Name="Form">
+      <Column Name="id" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="productid" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="NVarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="created" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="createdby" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="modified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="modifiedby" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Association Name="Form_SavedForm" Member="SavedForms" ThisKey="id" OtherKey="formid" Type="SavedForm" />
+      <Association Name="Product_Form" Member="Product" ThisKey="productid" OtherKey="id" Type="Product" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.InsurerPartnerProducts" Member="InsurerPartnerProducts">
+    <Type Name="InsurerPartnerProduct">
+      <Column Name="id" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="insurerpartnerid" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="productid" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="commissionrate" Type="System.Decimal" DbType="Decimal(18,6)" CanBeNull="true" />
+      <Column Name="created" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="createdby" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="modified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="modifiedby" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Association Name="InsurerPartner_InsurerPartnerProduct" Member="InsurerPartner" ThisKey="insurerpartnerid" OtherKey="id" Type="InsurerPartner" IsForeignKey="true" />
+      <Association Name="Product_InsurerPartnerProduct" Member="Product" ThisKey="productid" OtherKey="id" Type="Product" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.InsurerPartners" Member="InsurerPartners">
+    <Type Name="InsurerPartner">
+      <Column Name="id" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="insurerid" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="partnerid" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="commissionrate" Type="System.Decimal" DbType="Decimal(18,6) NOT NULL" CanBeNull="false" />
+      <Column Name="created" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="createdby" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="modified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="modifiedby" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Association Name="InsurerPartner_InsurerPartnerProduct" Member="InsurerPartnerProducts" ThisKey="id" OtherKey="insurerpartnerid" Type="InsurerPartnerProduct" />
+      <Association Name="Insurer_InsurerPartner" Member="Insurer" ThisKey="insurerid" OtherKey="id" Type="Insurer" IsForeignKey="true" />
+      <Association Name="Partner_InsurerPartner" Member="Partner" ThisKey="partnerid" OtherKey="id" Type="Partner" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Insurers" Member="Insurers">
+    <Type Name="Insurer">
+      <Column Name="id" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="created" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="createdby" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="modified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="modifiedby" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Association Name="Insurer_InsurerPartner" Member="InsurerPartners" ThisKey="id" OtherKey="insurerid" Type="InsurerPartner" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Partners" Member="Partners">
+    <Type Name="Partner">
+      <Column Name="id" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="rate" Type="System.Decimal" DbType="Decimal(18,6)" CanBeNull="true" />
+      <Column Name="created" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="createdby" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="modified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="modifiedby" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Association Name="Partner_InsurerPartner" Member="InsurerPartners" ThisKey="id" OtherKey="partnerid" Type="InsurerPartner" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Policies" Member="Policies">
+    <Type Name="Policy">
+      <Column Name="id" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="productid" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="documentid" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="startdate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="enddate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="cost" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="created" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="createdby" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="modified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="modifiedby" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Association Name="Policy_Product" Member="Product" ThisKey="id" OtherKey="id" Type="Product" Cardinality="One" />
+      <Association Name="Policy_SavedForm" Member="SavedForms" ThisKey="id" OtherKey="policyid" Type="SavedForm" />
+      <Association Name="Document_Policy" Member="Document" ThisKey="documentid" OtherKey="id" Type="Document" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Products" Member="Products">
+    <Type Name="Product">
+      <Column Name="id" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="NVarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="created" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="createdby" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="modified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="modifiedby" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Association Name="Product_Form" Member="Forms" ThisKey="id" OtherKey="productid" Type="Form" />
+      <Association Name="Product_InsurerPartnerProduct" Member="InsurerPartnerProducts" ThisKey="id" OtherKey="productid" Type="InsurerPartnerProduct" />
+      <Association Name="Policy_Product" Member="Policy" ThisKey="id" OtherKey="id" Type="Policy" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SavedForms" Member="SavedForms">
+    <Type Name="SavedForm">
+      <Column Name="id" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="applicantid" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="formid" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="policyid" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="answers" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="created" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="createdby" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="modified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="modifiedby" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Association Name="Applicant_SavedForm" Member="Applicant" ThisKey="applicantid" OtherKey="id" Type="Applicant" IsForeignKey="true" />
+      <Association Name="Form_SavedForm" Member="Form" ThisKey="formid" OtherKey="id" Type="Form" IsForeignKey="true" />
+      <Association Name="Policy_SavedForm" Member="Policy" ThisKey="policyid" OtherKey="id" Type="Policy" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>
