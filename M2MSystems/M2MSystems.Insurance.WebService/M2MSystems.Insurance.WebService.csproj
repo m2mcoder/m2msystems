@@ -40,10 +40,16 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -58,9 +64,6 @@
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http">
     </Reference>
@@ -103,8 +106,17 @@
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\InsuranceQuoteController.cs" />
+    <Compile Include="Controllers\InsuranceSubmit\Models\KeyValue.cs" />
+    <Compile Include="Controllers\InsuranceSubmit\Models\Response.cs" />
+    <Compile Include="Controllers\InsuranceSubmit\Models\Application.cs" />
+    <Compile Include="Controllers\InsuranceSubmit\ApplicationExtractorsManager.cs" />
+    <Compile Include="Controllers\InsuranceSubmit\InsuranceTypes\ArtInsurance\ArtInsuranceApplicationExtractor.cs" />
+    <Compile Include="Controllers\InsuranceSubmit\InsuranceTypes\ArtInsurance\ArtInsuranceFeeCalculator.cs" />
+    <Compile Include="Controllers\InsuranceSubmit\InsuranceTypes\ArtInsurance\ArtInsuranceValidator.cs" />
+    <Compile Include="Controllers\InsuranceSubmit\FeeCalculatorsManager.cs" />
+    <Compile Include="Controllers\InsuranceSubmitController.cs" />
     <Compile Include="Controllers\InsuranceGetController.cs" />
+    <Compile Include="Controllers\InsuranceSubmit\ValidatorsManager.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -112,7 +124,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />
+    <Content Include="Forms\ArtInsurance.html" />
     <Content Include="Global.asax" />
+    <None Include="Scripts\jquery-2.1.0.intellisense.js" />
+    <Content Include="Scripts\jquery-2.1.0.js" />
+    <Content Include="Scripts\jquery-2.1.0.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -120,10 +136,17 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
+    <Content Include="Scripts\jquery-2.1.0.min.map" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\M2MSystems.Database\M2MSystems.Database.csproj">
+      <Project>{BA342599-A394-488C-9674-14474B5792C1}</Project>
+      <Name>M2MSystems.Database</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -193,13 +193,7 @@ namespace M2MSystems.Database
 		
 		private string _thirdpartykey;
 		
-		private System.DateTime _created;
-		
-		private string _createdby;
-		
-		private System.DateTime _modified;
-		
-		private string _modifiedby;
+		private string _email;
 		
 		private EntitySet<SavedForm> _SavedForms;
 		
@@ -221,14 +215,8 @@ namespace M2MSystems.Database
     partial void OncityChanged();
     partial void OnthirdpartykeyChanging(string value);
     partial void OnthirdpartykeyChanged();
-    partial void OncreatedChanging(System.DateTime value);
-    partial void OncreatedChanged();
-    partial void OncreatedbyChanging(string value);
-    partial void OncreatedbyChanged();
-    partial void OnmodifiedChanging(System.DateTime value);
-    partial void OnmodifiedChanged();
-    partial void OnmodifiedbyChanging(string value);
-    partial void OnmodifiedbyChanged();
+    partial void OnemailChanging(string value);
+    partial void OnemailChanged();
     #endregion
 		
 		public Applicant()
@@ -377,82 +365,22 @@ namespace M2MSystems.Database
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_created", DbType="DateTime NOT NULL")]
-		public System.DateTime created
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_email", CanBeNull=false)]
+		public string email
 		{
 			get
 			{
-				return this._created;
+				return this._email;
 			}
 			set
 			{
-				if ((this._created != value))
+				if ((this._email != value))
 				{
-					this.OncreatedChanging(value);
+					this.OnemailChanging(value);
 					this.SendPropertyChanging();
-					this._created = value;
-					this.SendPropertyChanged("created");
-					this.OncreatedChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_createdby", DbType="NVarChar(200)")]
-		public string createdby
-		{
-			get
-			{
-				return this._createdby;
-			}
-			set
-			{
-				if ((this._createdby != value))
-				{
-					this.OncreatedbyChanging(value);
-					this.SendPropertyChanging();
-					this._createdby = value;
-					this.SendPropertyChanged("createdby");
-					this.OncreatedbyChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_modified", DbType="DateTime NOT NULL")]
-		public System.DateTime modified
-		{
-			get
-			{
-				return this._modified;
-			}
-			set
-			{
-				if ((this._modified != value))
-				{
-					this.OnmodifiedChanging(value);
-					this.SendPropertyChanging();
-					this._modified = value;
-					this.SendPropertyChanged("modified");
-					this.OnmodifiedChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_modifiedby", DbType="NVarChar(200)")]
-		public string modifiedby
-		{
-			get
-			{
-				return this._modifiedby;
-			}
-			set
-			{
-				if ((this._modifiedby != value))
-				{
-					this.OnmodifiedbyChanging(value);
-					this.SendPropertyChanging();
-					this._modifiedby = value;
-					this.SendPropertyChanged("modifiedby");
-					this.OnmodifiedbyChanged();
+					this._email = value;
+					this.SendPropertyChanged("email");
+					this.OnemailChanged();
 				}
 			}
 		}
@@ -511,17 +439,9 @@ namespace M2MSystems.Database
 		
 		private long _id;
 		
-		private System.Data.Linq.Binary _bin;
+		private byte[] _url;
 		
-		private System.DateTime _created;
-		
-		private string _createdby;
-		
-		private System.DateTime _modified;
-		
-		private string _modifiedby;
-		
-		private EntitySet<Policy> _Policies;
+		private EntityRef<Form> _Form;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -529,21 +449,13 @@ namespace M2MSystems.Database
     partial void OnCreated();
     partial void OnidChanging(long value);
     partial void OnidChanged();
-    partial void OnbinChanging(System.Data.Linq.Binary value);
+    partial void OnbinChanging(byte[] value);
     partial void OnbinChanged();
-    partial void OncreatedChanging(System.DateTime value);
-    partial void OncreatedChanged();
-    partial void OncreatedbyChanging(string value);
-    partial void OncreatedbyChanged();
-    partial void OnmodifiedChanging(System.DateTime value);
-    partial void OnmodifiedChanged();
-    partial void OnmodifiedbyChanging(string value);
-    partial void OnmodifiedbyChanged();
     #endregion
 		
 		public Document()
 		{
-			this._Policies = new EntitySet<Policy>(new Action<Policy>(this.attach_Policies), new Action<Policy>(this.detach_Policies));
+			this._Form = default(EntityRef<Form>);
 			OnCreated();
 		}
 		
@@ -558,6 +470,10 @@ namespace M2MSystems.Database
 			{
 				if ((this._id != value))
 				{
+					if (this._Form.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.OnidChanging(value);
 					this.SendPropertyChanging();
 					this._id = value;
@@ -567,116 +483,57 @@ namespace M2MSystems.Database
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_bin", DbType="VarBinary(MAX)", UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary bin
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_url", DbType="VARBINARY(MAX)", CanBeNull=false)]
+		public byte[] bin
 		{
 			get
 			{
-				return this._bin;
+				return this._url;
 			}
 			set
 			{
-				if ((this._bin != value))
+				if ((this._url != value))
 				{
 					this.OnbinChanging(value);
 					this.SendPropertyChanging();
-					this._bin = value;
+					this._url = value;
 					this.SendPropertyChanged("bin");
 					this.OnbinChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_created", DbType="DateTime NOT NULL")]
-		public System.DateTime created
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Form_Document", Storage="_Form", ThisKey="id", OtherKey="documentid", IsForeignKey=true)]
+		public Form Form
 		{
 			get
 			{
-				return this._created;
+				return this._Form.Entity;
 			}
 			set
 			{
-				if ((this._created != value))
+				Form previousValue = this._Form.Entity;
+				if (((previousValue != value) 
+							|| (this._Form.HasLoadedOrAssignedValue == false)))
 				{
-					this.OncreatedChanging(value);
 					this.SendPropertyChanging();
-					this._created = value;
-					this.SendPropertyChanged("created");
-					this.OncreatedChanged();
+					if ((previousValue != null))
+					{
+						this._Form.Entity = null;
+						previousValue.Documents.Remove(this);
+					}
+					this._Form.Entity = value;
+					if ((value != null))
+					{
+						value.Documents.Add(this);
+						this._id = value.documentid;
+					}
+					else
+					{
+						this._id = default(long);
+					}
+					this.SendPropertyChanged("Form");
 				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_createdby", DbType="NVarChar(200)")]
-		public string createdby
-		{
-			get
-			{
-				return this._createdby;
-			}
-			set
-			{
-				if ((this._createdby != value))
-				{
-					this.OncreatedbyChanging(value);
-					this.SendPropertyChanging();
-					this._createdby = value;
-					this.SendPropertyChanged("createdby");
-					this.OncreatedbyChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_modified", DbType="DateTime NOT NULL")]
-		public System.DateTime modified
-		{
-			get
-			{
-				return this._modified;
-			}
-			set
-			{
-				if ((this._modified != value))
-				{
-					this.OnmodifiedChanging(value);
-					this.SendPropertyChanging();
-					this._modified = value;
-					this.SendPropertyChanged("modified");
-					this.OnmodifiedChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_modifiedby", DbType="NVarChar(200)")]
-		public string modifiedby
-		{
-			get
-			{
-				return this._modifiedby;
-			}
-			set
-			{
-				if ((this._modifiedby != value))
-				{
-					this.OnmodifiedbyChanging(value);
-					this.SendPropertyChanging();
-					this._modifiedby = value;
-					this.SendPropertyChanged("modifiedby");
-					this.OnmodifiedbyChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Document_Policy", Storage="_Policies", ThisKey="id", OtherKey="documentid")]
-		public EntitySet<Policy> Policies
-		{
-			get
-			{
-				return this._Policies;
-			}
-			set
-			{
-				this._Policies.Assign(value);
 			}
 		}
 		
@@ -699,18 +556,6 @@ namespace M2MSystems.Database
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
-		
-		private void attach_Policies(Policy entity)
-		{
-			this.SendPropertyChanging();
-			entity.Document = this;
-		}
-		
-		private void detach_Policies(Policy entity)
-		{
-			this.SendPropertyChanging();
-			entity.Document = null;
-		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Forms")]
@@ -725,13 +570,15 @@ namespace M2MSystems.Database
 		
 		private string _title;
 		
-		private System.DateTime _created;
+		private long _documentid;
 		
-		private string _createdby;
+		private string _datamapper;
 		
-		private System.DateTime _modified;
+		private string _validator;
 		
-		private string _modifiedby;
+		private string _feecalculator;
+		
+		private EntitySet<Document> _Documents;
 		
 		private EntitySet<SavedForm> _SavedForms;
 		
@@ -747,18 +594,19 @@ namespace M2MSystems.Database
     partial void OnproductidChanged();
     partial void OntitleChanging(string value);
     partial void OntitleChanged();
-    partial void OncreatedChanging(System.DateTime value);
-    partial void OncreatedChanged();
-    partial void OncreatedbyChanging(string value);
-    partial void OncreatedbyChanged();
-    partial void OnmodifiedChanging(System.DateTime value);
-    partial void OnmodifiedChanged();
-    partial void OnmodifiedbyChanging(string value);
-    partial void OnmodifiedbyChanged();
+    partial void OndocumentidChanging(long value);
+    partial void OndocumentidChanged();
+    partial void OndatamapperChanging(string value);
+    partial void OndatamapperChanged();
+    partial void OnvalidatorChanging(string value);
+    partial void OnvalidatorChanged();
+    partial void OnfeecalculatorChanging(string value);
+    partial void OnfeecalculatorChanged();
     #endregion
 		
 		public Form()
 		{
+			this._Documents = new EntitySet<Document>(new Action<Document>(this.attach_Documents), new Action<Document>(this.detach_Documents));
 			this._SavedForms = new EntitySet<SavedForm>(new Action<SavedForm>(this.attach_SavedForms), new Action<SavedForm>(this.detach_SavedForms));
 			this._Product = default(EntityRef<Product>);
 			OnCreated();
@@ -828,83 +676,96 @@ namespace M2MSystems.Database
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_created", DbType="DateTime NOT NULL")]
-		public System.DateTime created
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_documentid", DbType="BigInt NOT NULL")]
+		public long documentid
 		{
 			get
 			{
-				return this._created;
+				return this._documentid;
 			}
 			set
 			{
-				if ((this._created != value))
+				if ((this._documentid != value))
 				{
-					this.OncreatedChanging(value);
+					this.OndocumentidChanging(value);
 					this.SendPropertyChanging();
-					this._created = value;
-					this.SendPropertyChanged("created");
-					this.OncreatedChanged();
+					this._documentid = value;
+					this.SendPropertyChanged("documentid");
+					this.OndocumentidChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_createdby", DbType="NVarChar(200)")]
-		public string createdby
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_datamapper", DbType="varchar(50)", CanBeNull=false)]
+		public string datamapper
 		{
 			get
 			{
-				return this._createdby;
+				return this._datamapper;
 			}
 			set
 			{
-				if ((this._createdby != value))
+				if ((this._datamapper != value))
 				{
-					this.OncreatedbyChanging(value);
+					this.OndatamapperChanging(value);
 					this.SendPropertyChanging();
-					this._createdby = value;
-					this.SendPropertyChanged("createdby");
-					this.OncreatedbyChanged();
+					this._datamapper = value;
+					this.SendPropertyChanged("datamapper");
+					this.OndatamapperChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_modified", DbType="DateTime NOT NULL")]
-		public System.DateTime modified
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_validator", DbType="varchar(50)", CanBeNull=false)]
+		public string validator
 		{
 			get
 			{
-				return this._modified;
+				return this._validator;
 			}
 			set
 			{
-				if ((this._modified != value))
+				if ((this._validator != value))
 				{
-					this.OnmodifiedChanging(value);
+					this.OnvalidatorChanging(value);
 					this.SendPropertyChanging();
-					this._modified = value;
-					this.SendPropertyChanged("modified");
-					this.OnmodifiedChanged();
+					this._validator = value;
+					this.SendPropertyChanged("validator");
+					this.OnvalidatorChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_modifiedby", DbType="NVarChar(200)")]
-		public string modifiedby
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_feecalculator", DbType="varchar(50)", CanBeNull=false)]
+		public string feecalculator
 		{
 			get
 			{
-				return this._modifiedby;
+				return this._feecalculator;
 			}
 			set
 			{
-				if ((this._modifiedby != value))
+				if ((this._feecalculator != value))
 				{
-					this.OnmodifiedbyChanging(value);
+					this.OnfeecalculatorChanging(value);
 					this.SendPropertyChanging();
-					this._modifiedby = value;
-					this.SendPropertyChanged("modifiedby");
-					this.OnmodifiedbyChanged();
+					this._feecalculator = value;
+					this.SendPropertyChanged("feecalculator");
+					this.OnfeecalculatorChanged();
 				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Form_Document", Storage="_Documents", ThisKey="documentid", OtherKey="id")]
+		public EntitySet<Document> Documents
+		{
+			get
+			{
+				return this._Documents;
+			}
+			set
+			{
+				this._Documents.Assign(value);
 			}
 		}
 		
@@ -975,6 +836,18 @@ namespace M2MSystems.Database
 			}
 		}
 		
+		private void attach_Documents(Document entity)
+		{
+			this.SendPropertyChanging();
+			entity.Form = this;
+		}
+		
+		private void detach_Documents(Document entity)
+		{
+			this.SendPropertyChanging();
+			entity.Form = null;
+		}
+		
 		private void attach_SavedForms(SavedForm entity)
 		{
 			this.SendPropertyChanging();
@@ -1000,15 +873,7 @@ namespace M2MSystems.Database
 		
 		private long _productid;
 		
-		private System.Nullable<decimal> _commissionrate;
-		
-		private System.DateTime _created;
-		
-		private string _createdby;
-		
-		private System.DateTime _modified;
-		
-		private string _modifiedby;
+		private decimal _commissionrate;
 		
 		private EntityRef<InsurerPartner> _InsurerPartner;
 		
@@ -1024,16 +889,8 @@ namespace M2MSystems.Database
     partial void OninsurerpartneridChanged();
     partial void OnproductidChanging(long value);
     partial void OnproductidChanged();
-    partial void OncommissionrateChanging(System.Nullable<decimal> value);
+    partial void OncommissionrateChanging(decimal value);
     partial void OncommissionrateChanged();
-    partial void OncreatedChanging(System.DateTime value);
-    partial void OncreatedChanged();
-    partial void OncreatedbyChanging(string value);
-    partial void OncreatedbyChanged();
-    partial void OnmodifiedChanging(System.DateTime value);
-    partial void OnmodifiedChanged();
-    partial void OnmodifiedbyChanging(string value);
-    partial void OnmodifiedbyChanged();
     #endregion
 		
 		public InsurerPartnerProduct()
@@ -1112,7 +969,7 @@ namespace M2MSystems.Database
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_commissionrate", DbType="Decimal(18,6)")]
-		public System.Nullable<decimal> commissionrate
+		public decimal commissionrate
 		{
 			get
 			{
@@ -1127,86 +984,6 @@ namespace M2MSystems.Database
 					this._commissionrate = value;
 					this.SendPropertyChanged("commissionrate");
 					this.OncommissionrateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_created", DbType="DateTime NOT NULL")]
-		public System.DateTime created
-		{
-			get
-			{
-				return this._created;
-			}
-			set
-			{
-				if ((this._created != value))
-				{
-					this.OncreatedChanging(value);
-					this.SendPropertyChanging();
-					this._created = value;
-					this.SendPropertyChanged("created");
-					this.OncreatedChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_createdby", DbType="NVarChar(200)")]
-		public string createdby
-		{
-			get
-			{
-				return this._createdby;
-			}
-			set
-			{
-				if ((this._createdby != value))
-				{
-					this.OncreatedbyChanging(value);
-					this.SendPropertyChanging();
-					this._createdby = value;
-					this.SendPropertyChanged("createdby");
-					this.OncreatedbyChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_modified", DbType="DateTime NOT NULL")]
-		public System.DateTime modified
-		{
-			get
-			{
-				return this._modified;
-			}
-			set
-			{
-				if ((this._modified != value))
-				{
-					this.OnmodifiedChanging(value);
-					this.SendPropertyChanging();
-					this._modified = value;
-					this.SendPropertyChanged("modified");
-					this.OnmodifiedChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_modifiedby", DbType="NVarChar(200)")]
-		public string modifiedby
-		{
-			get
-			{
-				return this._modifiedby;
-			}
-			set
-			{
-				if ((this._modifiedby != value))
-				{
-					this.OnmodifiedbyChanging(value);
-					this.SendPropertyChanging();
-					this._modifiedby = value;
-					this.SendPropertyChanged("modifiedby");
-					this.OnmodifiedbyChanged();
 				}
 			}
 		}
@@ -1314,14 +1091,6 @@ namespace M2MSystems.Database
 		
 		private decimal _commissionrate;
 		
-		private System.DateTime _created;
-		
-		private string _createdby;
-		
-		private System.DateTime _modified;
-		
-		private string _modifiedby;
-		
 		private EntitySet<InsurerPartnerProduct> _InsurerPartnerProducts;
 		
 		private EntityRef<Insurer> _Insurer;
@@ -1340,14 +1109,6 @@ namespace M2MSystems.Database
     partial void OnpartneridChanged();
     partial void OncommissionrateChanging(decimal value);
     partial void OncommissionrateChanged();
-    partial void OncreatedChanging(System.DateTime value);
-    partial void OncreatedChanged();
-    partial void OncreatedbyChanging(string value);
-    partial void OncreatedbyChanged();
-    partial void OnmodifiedChanging(System.DateTime value);
-    partial void OnmodifiedChanged();
-    partial void OnmodifiedbyChanging(string value);
-    partial void OnmodifiedbyChanged();
     #endregion
 		
 		public InsurerPartner()
@@ -1442,86 +1203,6 @@ namespace M2MSystems.Database
 					this._commissionrate = value;
 					this.SendPropertyChanged("commissionrate");
 					this.OncommissionrateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_created", DbType="DateTime NOT NULL")]
-		public System.DateTime created
-		{
-			get
-			{
-				return this._created;
-			}
-			set
-			{
-				if ((this._created != value))
-				{
-					this.OncreatedChanging(value);
-					this.SendPropertyChanging();
-					this._created = value;
-					this.SendPropertyChanged("created");
-					this.OncreatedChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_createdby", DbType="NVarChar(200)")]
-		public string createdby
-		{
-			get
-			{
-				return this._createdby;
-			}
-			set
-			{
-				if ((this._createdby != value))
-				{
-					this.OncreatedbyChanging(value);
-					this.SendPropertyChanging();
-					this._createdby = value;
-					this.SendPropertyChanged("createdby");
-					this.OncreatedbyChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_modified", DbType="DateTime NOT NULL")]
-		public System.DateTime modified
-		{
-			get
-			{
-				return this._modified;
-			}
-			set
-			{
-				if ((this._modified != value))
-				{
-					this.OnmodifiedChanging(value);
-					this.SendPropertyChanging();
-					this._modified = value;
-					this.SendPropertyChanged("modified");
-					this.OnmodifiedChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_modifiedby", DbType="NVarChar(200)")]
-		public string modifiedby
-		{
-			get
-			{
-				return this._modifiedby;
-			}
-			set
-			{
-				if ((this._modifiedby != value))
-				{
-					this.OnmodifiedbyChanging(value);
-					this.SendPropertyChanging();
-					this._modifiedby = value;
-					this.SendPropertyChanged("modifiedby");
-					this.OnmodifiedbyChanged();
 				}
 			}
 		}
@@ -1648,13 +1329,7 @@ namespace M2MSystems.Database
 		
 		private long _id;
 		
-		private System.DateTime _created;
-		
-		private string _createdby;
-		
-		private System.DateTime _modified;
-		
-		private string _modifiedby;
+		private string _name;
 		
 		private EntitySet<InsurerPartner> _InsurerPartners;
 		
@@ -1664,14 +1339,8 @@ namespace M2MSystems.Database
     partial void OnCreated();
     partial void OnidChanging(long value);
     partial void OnidChanged();
-    partial void OncreatedChanging(System.DateTime value);
-    partial void OncreatedChanged();
-    partial void OncreatedbyChanging(string value);
-    partial void OncreatedbyChanged();
-    partial void OnmodifiedChanging(System.DateTime value);
-    partial void OnmodifiedChanged();
-    partial void OnmodifiedbyChanging(string value);
-    partial void OnmodifiedbyChanged();
+    partial void OnnameChanging(string value);
+    partial void OnnameChanged();
     #endregion
 		
 		public Insurer()
@@ -1700,82 +1369,22 @@ namespace M2MSystems.Database
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_created", DbType="DateTime NOT NULL")]
-		public System.DateTime created
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", CanBeNull=false)]
+		public string name
 		{
 			get
 			{
-				return this._created;
+				return this._name;
 			}
 			set
 			{
-				if ((this._created != value))
+				if ((this._name != value))
 				{
-					this.OncreatedChanging(value);
+					this.OnnameChanging(value);
 					this.SendPropertyChanging();
-					this._created = value;
-					this.SendPropertyChanged("created");
-					this.OncreatedChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_createdby", DbType="NVarChar(200)")]
-		public string createdby
-		{
-			get
-			{
-				return this._createdby;
-			}
-			set
-			{
-				if ((this._createdby != value))
-				{
-					this.OncreatedbyChanging(value);
-					this.SendPropertyChanging();
-					this._createdby = value;
-					this.SendPropertyChanged("createdby");
-					this.OncreatedbyChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_modified", DbType="DateTime NOT NULL")]
-		public System.DateTime modified
-		{
-			get
-			{
-				return this._modified;
-			}
-			set
-			{
-				if ((this._modified != value))
-				{
-					this.OnmodifiedChanging(value);
-					this.SendPropertyChanging();
-					this._modified = value;
-					this.SendPropertyChanged("modified");
-					this.OnmodifiedChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_modifiedby", DbType="NVarChar(200)")]
-		public string modifiedby
-		{
-			get
-			{
-				return this._modifiedby;
-			}
-			set
-			{
-				if ((this._modifiedby != value))
-				{
-					this.OnmodifiedbyChanging(value);
-					this.SendPropertyChanging();
-					this._modifiedby = value;
-					this.SendPropertyChanged("modifiedby");
-					this.OnmodifiedbyChanged();
+					this._name = value;
+					this.SendPropertyChanged("name");
+					this.OnnameChanged();
 				}
 			}
 		}
@@ -1834,15 +1443,9 @@ namespace M2MSystems.Database
 		
 		private long _id;
 		
-		private System.Nullable<decimal> _rate;
+		private decimal _rate;
 		
-		private System.DateTime _created;
-		
-		private string _createdby;
-		
-		private System.DateTime _modified;
-		
-		private string _modifiedby;
+		private string _name;
 		
 		private EntitySet<InsurerPartner> _InsurerPartners;
 		
@@ -1852,16 +1455,10 @@ namespace M2MSystems.Database
     partial void OnCreated();
     partial void OnidChanging(long value);
     partial void OnidChanged();
-    partial void OnrateChanging(System.Nullable<decimal> value);
+    partial void OnrateChanging(decimal value);
     partial void OnrateChanged();
-    partial void OncreatedChanging(System.DateTime value);
-    partial void OncreatedChanged();
-    partial void OncreatedbyChanging(string value);
-    partial void OncreatedbyChanged();
-    partial void OnmodifiedChanging(System.DateTime value);
-    partial void OnmodifiedChanged();
-    partial void OnmodifiedbyChanging(string value);
-    partial void OnmodifiedbyChanged();
+    partial void OnnameChanging(string value);
+    partial void OnnameChanged();
     #endregion
 		
 		public Partner()
@@ -1891,7 +1488,7 @@ namespace M2MSystems.Database
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_rate", DbType="Decimal(18,6)")]
-		public System.Nullable<decimal> rate
+		public decimal rate
 		{
 			get
 			{
@@ -1910,82 +1507,22 @@ namespace M2MSystems.Database
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_created", DbType="DateTime NOT NULL")]
-		public System.DateTime created
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", CanBeNull=false)]
+		public string name
 		{
 			get
 			{
-				return this._created;
+				return this._name;
 			}
 			set
 			{
-				if ((this._created != value))
+				if ((this._name != value))
 				{
-					this.OncreatedChanging(value);
+					this.OnnameChanging(value);
 					this.SendPropertyChanging();
-					this._created = value;
-					this.SendPropertyChanged("created");
-					this.OncreatedChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_createdby", DbType="NVarChar(200)")]
-		public string createdby
-		{
-			get
-			{
-				return this._createdby;
-			}
-			set
-			{
-				if ((this._createdby != value))
-				{
-					this.OncreatedbyChanging(value);
-					this.SendPropertyChanging();
-					this._createdby = value;
-					this.SendPropertyChanged("createdby");
-					this.OncreatedbyChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_modified", DbType="DateTime NOT NULL")]
-		public System.DateTime modified
-		{
-			get
-			{
-				return this._modified;
-			}
-			set
-			{
-				if ((this._modified != value))
-				{
-					this.OnmodifiedChanging(value);
-					this.SendPropertyChanging();
-					this._modified = value;
-					this.SendPropertyChanged("modified");
-					this.OnmodifiedChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_modifiedby", DbType="NVarChar(200)")]
-		public string modifiedby
-		{
-			get
-			{
-				return this._modifiedby;
-			}
-			set
-			{
-				if ((this._modifiedby != value))
-				{
-					this.OnmodifiedbyChanging(value);
-					this.SendPropertyChanging();
-					this._modifiedby = value;
-					this.SendPropertyChanged("modifiedby");
-					this.OnmodifiedbyChanged();
+					this._name = value;
+					this.SendPropertyChanged("name");
+					this.OnnameChanged();
 				}
 			}
 		}
@@ -2048,25 +1585,15 @@ namespace M2MSystems.Database
 		
 		private long _documentid;
 		
-		private System.DateTime _startdate;
+		private System.DateTimeOffset _startdate;
 		
-		private System.DateTime _enddate;
+		private System.DateTimeOffset _enddate;
 		
 		private decimal _cost;
-		
-		private System.DateTime _created;
-		
-		private string _createdby;
-		
-		private System.DateTime _modified;
-		
-		private string _modifiedby;
 		
 		private EntityRef<Product> _Product;
 		
 		private EntitySet<SavedForm> _SavedForms;
-		
-		private EntityRef<Document> _Document;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -2078,27 +1605,18 @@ namespace M2MSystems.Database
     partial void OnproductidChanged();
     partial void OndocumentidChanging(long value);
     partial void OndocumentidChanged();
-    partial void OnstartdateChanging(System.DateTime value);
+    partial void OnstartdateChanging(System.DateTimeOffset value);
     partial void OnstartdateChanged();
-    partial void OnenddateChanging(System.DateTime value);
+    partial void OnenddateChanging(System.DateTimeOffset value);
     partial void OnenddateChanged();
     partial void OncostChanging(decimal value);
     partial void OncostChanged();
-    partial void OncreatedChanging(System.DateTime value);
-    partial void OncreatedChanged();
-    partial void OncreatedbyChanging(string value);
-    partial void OncreatedbyChanged();
-    partial void OnmodifiedChanging(System.DateTime value);
-    partial void OnmodifiedChanged();
-    partial void OnmodifiedbyChanging(string value);
-    partial void OnmodifiedbyChanged();
     #endregion
 		
 		public Policy()
 		{
 			this._Product = default(EntityRef<Product>);
 			this._SavedForms = new EntitySet<SavedForm>(new Action<SavedForm>(this.attach_SavedForms), new Action<SavedForm>(this.detach_SavedForms));
-			this._Document = default(EntityRef<Document>);
 			OnCreated();
 		}
 		
@@ -2153,10 +1671,6 @@ namespace M2MSystems.Database
 			{
 				if ((this._documentid != value))
 				{
-					if (this._Document.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
 					this.OndocumentidChanging(value);
 					this.SendPropertyChanging();
 					this._documentid = value;
@@ -2166,8 +1680,8 @@ namespace M2MSystems.Database
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_startdate", DbType="DateTime NOT NULL")]
-		public System.DateTime startdate
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_startdate", DbType="DateTimeOffset NOT NULL")]
+		public System.DateTimeOffset startdate
 		{
 			get
 			{
@@ -2186,8 +1700,8 @@ namespace M2MSystems.Database
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_enddate", DbType="DateTime NOT NULL")]
-		public System.DateTime enddate
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_enddate", DbType="DateTimeOffset NOT NULL")]
+		public System.DateTimeOffset enddate
 		{
 			get
 			{
@@ -2222,86 +1736,6 @@ namespace M2MSystems.Database
 					this._cost = value;
 					this.SendPropertyChanged("cost");
 					this.OncostChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_created", DbType="DateTime NOT NULL")]
-		public System.DateTime created
-		{
-			get
-			{
-				return this._created;
-			}
-			set
-			{
-				if ((this._created != value))
-				{
-					this.OncreatedChanging(value);
-					this.SendPropertyChanging();
-					this._created = value;
-					this.SendPropertyChanged("created");
-					this.OncreatedChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_createdby", DbType="NVarChar(200)")]
-		public string createdby
-		{
-			get
-			{
-				return this._createdby;
-			}
-			set
-			{
-				if ((this._createdby != value))
-				{
-					this.OncreatedbyChanging(value);
-					this.SendPropertyChanging();
-					this._createdby = value;
-					this.SendPropertyChanged("createdby");
-					this.OncreatedbyChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_modified", DbType="DateTime NOT NULL")]
-		public System.DateTime modified
-		{
-			get
-			{
-				return this._modified;
-			}
-			set
-			{
-				if ((this._modified != value))
-				{
-					this.OnmodifiedChanging(value);
-					this.SendPropertyChanging();
-					this._modified = value;
-					this.SendPropertyChanged("modified");
-					this.OnmodifiedChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_modifiedby", DbType="NVarChar(200)")]
-		public string modifiedby
-		{
-			get
-			{
-				return this._modifiedby;
-			}
-			set
-			{
-				if ((this._modifiedby != value))
-				{
-					this.OnmodifiedbyChanging(value);
-					this.SendPropertyChanging();
-					this._modifiedby = value;
-					this.SendPropertyChanged("modifiedby");
-					this.OnmodifiedbyChanged();
 				}
 			}
 		}
@@ -2348,40 +1782,6 @@ namespace M2MSystems.Database
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Document_Policy", Storage="_Document", ThisKey="documentid", OtherKey="id", IsForeignKey=true)]
-		public Document Document
-		{
-			get
-			{
-				return this._Document.Entity;
-			}
-			set
-			{
-				Document previousValue = this._Document.Entity;
-				if (((previousValue != value) 
-							|| (this._Document.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Document.Entity = null;
-						previousValue.Policies.Remove(this);
-					}
-					this._Document.Entity = value;
-					if ((value != null))
-					{
-						value.Policies.Add(this);
-						this._documentid = value.id;
-					}
-					else
-					{
-						this._documentid = default(long);
-					}
-					this.SendPropertyChanged("Document");
-				}
-			}
-		}
-		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -2425,14 +1825,6 @@ namespace M2MSystems.Database
 		
 		private string _name;
 		
-		private System.DateTime _created;
-		
-		private string _createdby;
-		
-		private System.DateTime _modified;
-		
-		private string _modifiedby;
-		
 		private EntitySet<Form> _Forms;
 		
 		private EntitySet<InsurerPartnerProduct> _InsurerPartnerProducts;
@@ -2447,14 +1839,6 @@ namespace M2MSystems.Database
     partial void OnidChanged();
     partial void OnnameChanging(string value);
     partial void OnnameChanged();
-    partial void OncreatedChanging(System.DateTime value);
-    partial void OncreatedChanged();
-    partial void OncreatedbyChanging(string value);
-    partial void OncreatedbyChanged();
-    partial void OnmodifiedChanging(System.DateTime value);
-    partial void OnmodifiedChanged();
-    partial void OnmodifiedbyChanging(string value);
-    partial void OnmodifiedbyChanged();
     #endregion
 		
 		public Product()
@@ -2505,86 +1889,6 @@ namespace M2MSystems.Database
 					this._name = value;
 					this.SendPropertyChanged("name");
 					this.OnnameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_created", DbType="DateTime NOT NULL")]
-		public System.DateTime created
-		{
-			get
-			{
-				return this._created;
-			}
-			set
-			{
-				if ((this._created != value))
-				{
-					this.OncreatedChanging(value);
-					this.SendPropertyChanging();
-					this._created = value;
-					this.SendPropertyChanged("created");
-					this.OncreatedChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_createdby", DbType="NVarChar(200)")]
-		public string createdby
-		{
-			get
-			{
-				return this._createdby;
-			}
-			set
-			{
-				if ((this._createdby != value))
-				{
-					this.OncreatedbyChanging(value);
-					this.SendPropertyChanging();
-					this._createdby = value;
-					this.SendPropertyChanged("createdby");
-					this.OncreatedbyChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_modified", DbType="DateTime NOT NULL")]
-		public System.DateTime modified
-		{
-			get
-			{
-				return this._modified;
-			}
-			set
-			{
-				if ((this._modified != value))
-				{
-					this.OnmodifiedChanging(value);
-					this.SendPropertyChanging();
-					this._modified = value;
-					this.SendPropertyChanged("modified");
-					this.OnmodifiedChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_modifiedby", DbType="NVarChar(200)")]
-		public string modifiedby
-		{
-			get
-			{
-				return this._modifiedby;
-			}
-			set
-			{
-				if ((this._modifiedby != value))
-				{
-					this.OnmodifiedbyChanging(value);
-					this.SendPropertyChanging();
-					this._modifiedby = value;
-					this.SendPropertyChanged("modifiedby");
-					this.OnmodifiedbyChanged();
 				}
 			}
 		}
@@ -2710,14 +2014,6 @@ namespace M2MSystems.Database
 		
 		private string _answers;
 		
-		private System.DateTime _created;
-		
-		private string _createdby;
-		
-		private System.DateTime _modified;
-		
-		private string _modifiedby;
-		
 		private EntityRef<Applicant> _Applicant;
 		
 		private EntityRef<Form> _Form;
@@ -2738,14 +2034,6 @@ namespace M2MSystems.Database
     partial void OnpolicyidChanged();
     partial void OnanswersChanging(string value);
     partial void OnanswersChanged();
-    partial void OncreatedChanging(System.DateTime value);
-    partial void OncreatedChanged();
-    partial void OncreatedbyChanging(string value);
-    partial void OncreatedbyChanged();
-    partial void OnmodifiedChanging(System.DateTime value);
-    partial void OnmodifiedChanged();
-    partial void OnmodifiedbyChanging(string value);
-    partial void OnmodifiedbyChanged();
     #endregion
 		
 		public SavedForm()
@@ -2864,86 +2152,6 @@ namespace M2MSystems.Database
 					this._answers = value;
 					this.SendPropertyChanged("answers");
 					this.OnanswersChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_created", DbType="DateTime NOT NULL")]
-		public System.DateTime created
-		{
-			get
-			{
-				return this._created;
-			}
-			set
-			{
-				if ((this._created != value))
-				{
-					this.OncreatedChanging(value);
-					this.SendPropertyChanging();
-					this._created = value;
-					this.SendPropertyChanged("created");
-					this.OncreatedChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_createdby", DbType="NVarChar(200)")]
-		public string createdby
-		{
-			get
-			{
-				return this._createdby;
-			}
-			set
-			{
-				if ((this._createdby != value))
-				{
-					this.OncreatedbyChanging(value);
-					this.SendPropertyChanging();
-					this._createdby = value;
-					this.SendPropertyChanged("createdby");
-					this.OncreatedbyChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_modified", DbType="DateTime NOT NULL")]
-		public System.DateTime modified
-		{
-			get
-			{
-				return this._modified;
-			}
-			set
-			{
-				if ((this._modified != value))
-				{
-					this.OnmodifiedChanging(value);
-					this.SendPropertyChanging();
-					this._modified = value;
-					this.SendPropertyChanged("modified");
-					this.OnmodifiedChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_modifiedby", DbType="NVarChar(200)")]
-		public string modifiedby
-		{
-			get
-			{
-				return this._modifiedby;
-			}
-			set
-			{
-				if ((this._modifiedby != value))
-				{
-					this.OnmodifiedbyChanging(value);
-					this.SendPropertyChanging();
-					this._modifiedby = value;
-					this.SendPropertyChanged("modifiedby");
-					this.OnmodifiedbyChanged();
 				}
 			}
 		}

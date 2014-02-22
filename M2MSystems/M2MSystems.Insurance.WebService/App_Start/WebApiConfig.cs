@@ -15,9 +15,9 @@ namespace M2MSystems.Insurance.WebService
                 new { controller = "InsuranceGet" }
             );
             config.Routes.MapHttpRoute(
-                "InsuranceQuote",
-                "api/1/insurance/{partnerId}/{formId}/quote",
-                new { controller = "InsuranceQuote" }
+                "InsuranceSubmit",
+                "api/1/insurance/{partnerId}/{formId}/submit",
+                new { controller = "InsuranceSubmit" }
             );
         }
     }

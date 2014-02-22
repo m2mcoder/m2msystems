@@ -1,0 +1,314 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <title>Insuarance form</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <script src="/Scripts/jquery-2.1.0.js" language="javascript"></script>
+        <script type="text/javascript">
+            $.fn.serializeObject = function() {
+                var o = [];
+                var a = this.serializeArray();
+                $.each(a, function () {
+                    o.push({ Key: this.name, Value: this.value });
+                });
+                return o;
+            };
+            $(document).ready(function() {
+                var form = jQuery("#form");
+                form.bind("submit", function (e) {
+                    e.preventDefault();
+                    $.ajax({
+                        url: $(location).attr('href') + "/submit",
+                        type: 'POST',
+                        dataType: 'json',
+                        data: JSON.stringify(form.serializeObject()),
+                        success: function(data) {
+                            console.log(data);
+                            if (data.ok == false) {
+                                visualizeValidationResults(data.validationResults);
+                            } else {
+                                visualizeQuote(data.quote);
+                            }
+                        },
+                        failure: function(data) {
+                            visualizeValidationResults({
+                                commonError: "Unable get a quote at current time. Try again later."
+                            });
+                        }
+                    });
+                    return false;
+                });
+            });
+        </script>
+        <script language="javascript">
+            function visualizeQuote(quote) {
+                
+            }
+
+            function visualizeValidationResults(validationResults) {
+                
+            }
+        </script>
+    </head>
+    <body>
+        <form id="form" action="">
+            <table width="800">
+                <tbody>
+                    <tr>
+                        <td style="background-color: rgb(238, 238, 238);" colspan="3">
+                            <span style="font-size: 1.2em; font-weight: bold; margin-right: 50px;">
+                                APPLICANT
+                                INFORMATION
+                            </span>    OCAD U Student Number: <input name="stunumber" type="text" size="20" maxlength="20">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            Business name:
+                            <input name="busname" type="text" size="80" maxlength="200">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            Name of principal(s):
+                            <input name="pr_name" type="text" size="40" maxlength="200">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 27%;">Telephone: <input name="phone" type="text" size="15" maxlength="20"></td>
+                        <td style="width: 27%;">
+                            Fax:
+                            <input name="fax" type="text" size="15" maxlength="20">
+                        </td>
+                        <td>Email: <input name="email" type="text" size="30"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            Website:
+                            <input name="website" style="margin-right: 20px;" type="text" size="30" maxlength="50">
+                            Other Memberships and Associations:
+                            <input name="others" type="text" size="30" maxlength="60">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">Full Address (including postal code): <input name="address" type="text" size="80" maxlength="200"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            Full Description of your work and products:      <select name="descr" size="1">
+                                <option>Select</option>
+                                <option>
+                                    Drawings
+                                    and Paintings
+                                </option>
+                                <option>Sculptures/Installation</option>
+                                <option>Mixed Media</option>
+                                <option>
+                                    Digital
+                                    Media
+                                </option>
+                                <option>Graphic Arts</option>
+                                <option>Printmaking</option>
+                                <option>Metalsmithing</option>
+                                <option>Fiber, Apparel</option>
+                                <option>
+                                    Ceramic, Clay,
+                                    Pottery
+                                </option>
+                                <option>Glass Blowers</option>
+                                <option>Paper Art</option>
+                                <option>Fabric Art</option>
+                                <option>Floral Art</option>
+                                <option>Folk Art</option>
+                                <option>Doll makers</option>
+                                <option>Leatherwork</option>
+                                <option>Calligraphy</option>
+                                <option>Mosaic</option>
+                                <option>Basket making</option>
+                                <option>Wood</option>
+                                <option>Furniture making</option>
+                                <option>
+                                    Scrapbooking
+                                    Products
+                                </option>
+                                <option>Soap makers</option>
+                                <option>Lotion makers</option>
+                                <option>Candle makers</option>
+                                <option>Photographers</option>
+                                <option>
+                                    Costume Jewelry and
+                                    Beading
+                                </option>
+                                <option>Other</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            If other, please describe:
+                            <input name="other_desc" type="text">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: rgb(238, 238, 238);" colspan="3"><span style="font-size: 1.2em; font-weight: bold; margin-right: 20px;">OPERATIONS:</span></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            Gross Annual Income ($):
+                            <input name="income" type="text" size="20" maxlength="40">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table width="800">
+                <tbody>
+                    <tr>
+                        <td style="background-color: rgb(238, 238, 238);" colspan="4">
+                            <span style="font-size: 1.2em; font-weight: bold; margin-right: 80px;">
+                                POLICY
+                                LIMITS
+                            </span>    	 <span style="font-weight: bold;">
+                                Please Select Desired
+                                Coverage Limits below:
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Commercial Liability:</td>
+                        <td>
+                            <div style="margin-right: 30px; float: left;">
+                                <input name="liab[]" type="radio"
+                                       value="1"> $2,000,000<br><input name="liab[]" type="radio" value="2">
+                                $3,000,000
+                            </div>
+                            <div style="float: left;">
+                                <input name="liab[]" type="radio" value="3">
+                                $4,000,000<br><input name="liab[]" type="radio" value="4"> $5,000,000
+                            </div>
+                        </td>
+                        <td>Equipment Breakdown:</td>
+                        <td>
+                            <input name="equip[]" type="radio" value="1"> Yes, please
+                            quote<br><input name="equip[]" type="radio" value="2"> No, not needed
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Property / Exhibitor Floater:</td>
+                        <td>
+                            <div style="margin-right: 20px; float: left;">
+                                <input name="prop[]" type="radio"
+                                       value="1"> $10,000/$10,000<br><input name="prop[]" type="radio" value="2">
+                                $25,000/$25,000
+                            </div>
+                            <div style="float: left;">
+                                <input name="prop[]" type="radio" value="3">
+                                $50,000/$50,000<br><input name="prop[]" type="radio" value="4">
+                                $100,000/$100,000
+                            </div>
+                        </td>
+                        <td>Precious and semi-precious metals and stones coverage extension:</td>
+                        <td>
+                            <input name="metals[]" type="radio" value="1"> 10,000<br><input name="metals[]"
+                                                                                            type="radio" value="2"> 25,000<br><input name="metals[]" type="radio"
+                                                                                                                                     value="3"> 35,000<br><input name="metals[]" type="radio" value="4"> 50,000
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Fine Arts (value of your own work):</td>
+                        <td>
+                            <div style="margin-right: 30px; float: left;">
+                                <input name="arts[]" type="radio"
+                                       value="1"> $10,000<br><input name="arts[]" type="radio" value="2"> $25,000
+                            </div>
+                            <div style="float: left;">
+                                <input name="arts[]" type="radio" value="3">
+                                $50,000<br><input name="arts[]" type="radio" value="4"> $100,000
+                            </div>
+                        </td>
+                        <td>Crime Coverage:</td>
+                        <td>
+                            <input name="crime[]" type="radio" value="1"> $5,000<br><input name="crime[]"
+                                                                                           type="radio" value="2"> $10,000<br>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table width="800">
+                <tbody>
+                    <tr>
+                        <td style="line-height: 25px; padding-bottom: 0; background-color: rgb(238, 238, 238);"
+                            colspan="4">
+                            <span style="font-weight: bold;">
+                                BY PRESSING THE "CONTINUE"
+                                BUTTON YOU CONFIRM THAT YOU UNDERSTAND THAT THE FOLLOWING PRODUCTS ARE
+                                EXCLUDED IN THIS POLICY:
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 45%;">
+                            <input name="excluded[]" type="checkbox"
+                                   value="1"> Products designed for infants and toddler use<br><input name="excluded[]"
+                                                                                                      type="checkbox" value="1"> Re-sale or distribution or third party
+                            products<br><input name="excluded[]" type="checkbox" value="3"> Saddled,
+                            harnesses or horse furnishings<br><input name="excluded[]" type="checkbox"
+                                                                     value="2"> Tobacco related products
+                        </td>
+                        <td style="width: 30%;">
+                            <input name="excluded[]" type="checkbox"
+                                   value="1"> Antiques<br><input name="excluded[]" type="checkbox" value="1">
+                            Money, bullions, securities<br><input name="excluded[]" type="checkbox"
+                                                                  value="1"> Ammunition or weapons<br><input name="excluded[]" type="checkbox"
+                                                                                                             value="1"> Children's Furniture
+                        </td>
+                        <td style="vertical-align: top;">
+                            <input name="excluded[]" type="checkbox"
+                                   value="1"> Stamps<br><input name="excluded[]" type="checkbox" value="1">
+                            Toys<br><input name="excluded[]" type="checkbox" value="1"> Furs
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding-bottom: 0; background-color: rgb(238, 238, 238);"
+                            colspan="4">
+                            <span>
+                                PLEASE READ BEFORE USING APPLICATION: This application
+                                will be incorporated in its entirety into any relevant policy of insurance
+                                where insurers have relied upon the information contained herein. Any
+                                misrepresentations or concealment in this application for insurance will
+                                render insurance coverage null and void at inception. Please therefore
+                                check to make sure all questions have been fully answered and that all
+                                facts material to your insurance have been disclosed, if necessary by a
+                                supplement to the application. The Applicants have reviewed all parts and
+                                attachments of this application and acknowledge that all information is
+                                true and correct and understand that this application for insurance is
+                                based on the truth and completeness of this information.  I have provided
+                                personal information in this document and otherwise and I may in the
+                                future provide further personal information.  Some of this personal
+                                information may include, but is not limited to, my credit information and
+                                claims history.  I authorize my broker or insurance company to collect,
+                                use and disclose any of this personal information, subject to the law of
+                                and to my broker’s or insurance company’s policy regarding personal
+                                information, for the purposes of communicating with me, assessing my
+                                application for insurance and underwriting my policies, evaluating claims,
+                                detecting and preventing fraud, and analyzing business results.  I can
+                                confirm that all individuals whose personal information is contained in
+                                this document have authorized that I agree to the above on their behalf.
+                                Using of this form does not bind the Applicant to purchase the insurance
+                                or the insurer to accept the risk, but is agreed that this form shall be
+                                the basis of the contract should a policy be issued. Insurers: various
+                                underwriters through Canfinse Group Inc.
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            <span style="text-align: center">
+                                <input name="continue" type="submit" value="Continue">
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+</body>
+</html>
