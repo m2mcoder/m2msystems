@@ -441,7 +441,7 @@ namespace M2MSystems.Database
 		
 		private byte[] _url;
 		
-		private EntityRef<Form> _Form;
+		private EntityRef<Policy> _Policy;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -455,7 +455,7 @@ namespace M2MSystems.Database
 		
 		public Document()
 		{
-			this._Form = default(EntityRef<Form>);
+			this._Policy = default(EntityRef<Policy>);
 			OnCreated();
 		}
 		
@@ -470,7 +470,7 @@ namespace M2MSystems.Database
 			{
 				if ((this._id != value))
 				{
-					if (this._Form.HasLoadedOrAssignedValue)
+					if (this._Policy.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
@@ -503,26 +503,26 @@ namespace M2MSystems.Database
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Form_Document", Storage="_Form", ThisKey="id", OtherKey="documentid", IsForeignKey=true)]
-		public Form Form
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Policy_Document", Storage="_Policy", ThisKey="id", OtherKey="documentid", IsForeignKey=true)]
+		public Policy Policy
 		{
 			get
 			{
-				return this._Form.Entity;
+				return this._Policy.Entity;
 			}
 			set
 			{
-				Form previousValue = this._Form.Entity;
+				Policy previousValue = this._Policy.Entity;
 				if (((previousValue != value) 
-							|| (this._Form.HasLoadedOrAssignedValue == false)))
+							|| (this._Policy.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._Form.Entity = null;
+						this._Policy.Entity = null;
 						previousValue.Documents.Remove(this);
 					}
-					this._Form.Entity = value;
+					this._Policy.Entity = value;
 					if ((value != null))
 					{
 						value.Documents.Add(this);
@@ -532,7 +532,7 @@ namespace M2MSystems.Database
 					{
 						this._id = default(long);
 					}
-					this.SendPropertyChanged("Form");
+					this.SendPropertyChanged("Policy");
 				}
 			}
 		}
@@ -570,15 +570,13 @@ namespace M2MSystems.Database
 		
 		private string _title;
 		
-		private long _documentid;
-		
 		private string _datamapper;
 		
 		private string _validator;
 		
 		private string _feecalculator;
 		
-		private EntitySet<Document> _Documents;
+		private string _url;
 		
 		private EntitySet<SavedForm> _SavedForms;
 		
@@ -594,19 +592,18 @@ namespace M2MSystems.Database
     partial void OnproductidChanged();
     partial void OntitleChanging(string value);
     partial void OntitleChanged();
-    partial void OndocumentidChanging(long value);
-    partial void OndocumentidChanged();
-    partial void OndatamapperChanging(string value);
-    partial void OndatamapperChanged();
+    partial void OnapplicationextractorChanging(string value);
+    partial void OnapplicationextractorChanged();
     partial void OnvalidatorChanging(string value);
     partial void OnvalidatorChanged();
     partial void OnfeecalculatorChanging(string value);
     partial void OnfeecalculatorChanged();
+    partial void OnurlChanging(string value);
+    partial void OnurlChanged();
     #endregion
 		
 		public Form()
 		{
-			this._Documents = new EntitySet<Document>(new Action<Document>(this.attach_Documents), new Action<Document>(this.detach_Documents));
 			this._SavedForms = new EntitySet<SavedForm>(new Action<SavedForm>(this.attach_SavedForms), new Action<SavedForm>(this.detach_SavedForms));
 			this._Product = default(EntityRef<Product>);
 			OnCreated();
@@ -676,28 +673,8 @@ namespace M2MSystems.Database
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_documentid", DbType="BigInt NOT NULL")]
-		public long documentid
-		{
-			get
-			{
-				return this._documentid;
-			}
-			set
-			{
-				if ((this._documentid != value))
-				{
-					this.OndocumentidChanging(value);
-					this.SendPropertyChanging();
-					this._documentid = value;
-					this.SendPropertyChanged("documentid");
-					this.OndocumentidChanged();
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_datamapper", DbType="varchar(50)", CanBeNull=false)]
-		public string datamapper
+		public string applicationextractor
 		{
 			get
 			{
@@ -707,11 +684,11 @@ namespace M2MSystems.Database
 			{
 				if ((this._datamapper != value))
 				{
-					this.OndatamapperChanging(value);
+					this.OnapplicationextractorChanging(value);
 					this.SendPropertyChanging();
 					this._datamapper = value;
-					this.SendPropertyChanged("datamapper");
-					this.OndatamapperChanged();
+					this.SendPropertyChanged("applicationextractor");
+					this.OnapplicationextractorChanged();
 				}
 			}
 		}
@@ -756,16 +733,23 @@ namespace M2MSystems.Database
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Form_Document", Storage="_Documents", ThisKey="documentid", OtherKey="id")]
-		public EntitySet<Document> Documents
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_url", DbType="varchar(200)", CanBeNull=false)]
+		public string url
 		{
 			get
 			{
-				return this._Documents;
+				return this._url;
 			}
 			set
 			{
-				this._Documents.Assign(value);
+				if ((this._url != value))
+				{
+					this.OnurlChanging(value);
+					this.SendPropertyChanging();
+					this._url = value;
+					this.SendPropertyChanged("url");
+					this.OnurlChanged();
+				}
 			}
 		}
 		
@@ -834,18 +818,6 @@ namespace M2MSystems.Database
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_Documents(Document entity)
-		{
-			this.SendPropertyChanging();
-			entity.Form = this;
-		}
-		
-		private void detach_Documents(Document entity)
-		{
-			this.SendPropertyChanging();
-			entity.Form = null;
 		}
 		
 		private void attach_SavedForms(SavedForm entity)
@@ -1591,6 +1563,8 @@ namespace M2MSystems.Database
 		
 		private decimal _cost;
 		
+		private EntitySet<Document> _Documents;
+		
 		private EntityRef<Product> _Product;
 		
 		private EntitySet<SavedForm> _SavedForms;
@@ -1615,6 +1589,7 @@ namespace M2MSystems.Database
 		
 		public Policy()
 		{
+			this._Documents = new EntitySet<Document>(new Action<Document>(this.attach_Documents), new Action<Document>(this.detach_Documents));
 			this._Product = default(EntityRef<Product>);
 			this._SavedForms = new EntitySet<SavedForm>(new Action<SavedForm>(this.attach_SavedForms), new Action<SavedForm>(this.detach_SavedForms));
 			OnCreated();
@@ -1740,6 +1715,19 @@ namespace M2MSystems.Database
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Policy_Document", Storage="_Documents", ThisKey="documentid", OtherKey="id")]
+		public EntitySet<Document> Documents
+		{
+			get
+			{
+				return this._Documents;
+			}
+			set
+			{
+				this._Documents.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Policy_Product", Storage="_Product", ThisKey="id", OtherKey="id", IsUnique=true, IsForeignKey=false)]
 		public Product Product
 		{
@@ -1800,6 +1788,18 @@ namespace M2MSystems.Database
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_Documents(Document entity)
+		{
+			this.SendPropertyChanging();
+			entity.Policy = this;
+		}
+		
+		private void detach_Documents(Document entity)
+		{
+			this.SendPropertyChanging();
+			entity.Policy = null;
 		}
 		
 		private void attach_SavedForms(SavedForm entity)

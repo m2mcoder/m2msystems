@@ -106,17 +106,15 @@
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\InsuranceSubmit\Models\KeyValue.cs" />
-    <Compile Include="Controllers\InsuranceSubmit\Models\Response.cs" />
-    <Compile Include="Controllers\InsuranceSubmit\Models\Application.cs" />
-    <Compile Include="Controllers\InsuranceSubmit\ApplicationExtractorsManager.cs" />
-    <Compile Include="Controllers\InsuranceSubmit\InsuranceTypes\ArtInsurance\ArtInsuranceApplicationExtractor.cs" />
-    <Compile Include="Controllers\InsuranceSubmit\InsuranceTypes\ArtInsurance\ArtInsuranceFeeCalculator.cs" />
-    <Compile Include="Controllers\InsuranceSubmit\InsuranceTypes\ArtInsurance\ArtInsuranceValidator.cs" />
-    <Compile Include="Controllers\InsuranceSubmit\FeeCalculatorsManager.cs" />
-    <Compile Include="Controllers\InsuranceSubmitController.cs" />
-    <Compile Include="Controllers\InsuranceGetController.cs" />
-    <Compile Include="Controllers\InsuranceSubmit\ValidatorsManager.cs" />
+    <Compile Include="Controllers\InsuranceCheck\Models\KeyValue.cs" />
+    <Compile Include="Controllers\InsuranceCheck\Models\Request.cs" />
+    <Compile Include="Controllers\InsuranceCheck\Models\Response.cs" />
+    <Compile Include="Controllers\InsuranceCheck\Models\Application.cs" />
+    <Compile Include="Controllers\InsuranceCheck\ApplicationExtractorsManager.cs" />
+    <Compile Include="Controllers\InsuranceCheck\InsuranceTypes\ArtInsurance\ArtInsuranceApplicationExtractor.cs" />
+    <Compile Include="Controllers\InsuranceCheck\InsuranceTypes\ArtInsurance\ArtInsuranceFeeCalculator.cs" />
+    <Compile Include="Controllers\InsuranceCheck\FeeCalculatorsManager.cs" />
+    <Compile Include="Controllers\InsuranceCheckController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -124,7 +122,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />
-    <Content Include="Forms\ArtInsurance.html" />
+    <Content Include="Forms\1\1\Index.html" />
     <Content Include="Global.asax" />
     <None Include="Scripts\jquery-2.1.0.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.0.js" />

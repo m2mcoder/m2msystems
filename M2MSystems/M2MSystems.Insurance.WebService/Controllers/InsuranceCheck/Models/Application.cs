@@ -1,6 +1,6 @@
 using System;
 
-namespace M2MSystems.Insurance.WebService.Controllers.InsuranceSubmit.Models
+namespace M2MSystems.Insurance.WebService.Controllers.InsuranceCheck.Models
 {
     public class Application
     {
@@ -12,5 +12,6 @@ namespace M2MSystems.Insurance.WebService.Controllers.InsuranceSubmit.Models
         public string Email { get; set; }
         public DateTimeOffset StartDate { get; set; }
         public DateTimeOffset EndDate { get; set; }
+        public string ThirdPartyKey { get; set; }
     }
 }

@@ -1,7 +1,7 @@
-using M2MSystems.Insurance.WebService.Controllers.InsuranceSubmit.InsuranceTypes.ArtInsurance;
-using M2MSystems.Insurance.WebService.Controllers.InsuranceSubmit.Models;
+using M2MSystems.Insurance.WebService.Controllers.InsuranceCheck.InsuranceTypes.ArtInsurance;
+using M2MSystems.Insurance.WebService.Controllers.InsuranceCheck.Models;
 
-namespace M2MSystems.Insurance.WebService.Controllers.InsuranceSubmit
+namespace M2MSystems.Insurance.WebService.Controllers.InsuranceCheck
 {
     public interface IFeeCalculatorsManager
     {

@@ -1,28 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Transactions;
 using System.Web.Http;
 using M2MSystems.Database;
-using M2MSystems.Insurance.WebService.Controllers.InsuranceSubmit;
-using M2MSystems.Insurance.WebService.Controllers.InsuranceSubmit.Models;
+using M2MSystems.Insurance.WebService.Controllers.InsuranceCheck;
+using M2MSystems.Insurance.WebService.Controllers.InsuranceCheck.Models;
 using Newtonsoft.Json;
 
 namespace M2MSystems.Insurance.WebService.Controllers
 {
-    public class InsuranceSubmitController : ApiController
+    public class InsuranceCheckController : ApiController
     {
         private readonly IApplicationExtractorsManager _applicationExtractorsManager;
-        private readonly IValidatorsManager _validatorsManager;
         private readonly IFeeCalculatorsManager _feeCalculatorsManager;
 
-        public InsuranceSubmitController()
+        public InsuranceCheckController()
         {
             _applicationExtractorsManager = new ApplicationExtractorsManager();
-            _validatorsManager = new ValidatorsManager();
             _feeCalculatorsManager = new FeeCalculatorsManager();
         }
 
-        public Response Post(long partnerId, long formId, [FromBody] List<KeyValue> formsData)
+        public Response Post(long partnerId, long formId, [FromBody] Request request)
         {
             var connectionString = System.Configuration.ConfigurationManager.
                 ConnectionStrings["M2MSystemsConnectionString"].ConnectionString;
@@ -40,19 +39,12 @@ namespace M2MSystems.Insurance.WebService.Controllers
                     Ok = false,
                     Message = "Unknown form."
                 };
-            var validator = _validatorsManager.GetValidator(form.validator);
-            if (validator == null)
+            var applicationExtractor = _applicationExtractorsManager.GetApplicationExtractor(form.applicationextractor);
+            if (applicationExtractor == null)
                 return new Response
                 {
                     Ok = false,
-                    Message = "Non properly configured form - missing valid validator."
-                };
-            var dataMapper = _applicationExtractorsManager.GetApplicationExtractor(form.datamapper);
-            if (dataMapper == null)
-                return new Response
-                {
-                    Ok = false,
-                    Message = "Non properly configured form - missing data mapper."
+                    Message = "Non properly configured form - missing application extractor."
                 };
             var feeCalculator = _feeCalculatorsManager.GetFeeCalculator(form.feecalculator);
             if (feeCalculator == null)
@@ -62,14 +54,12 @@ namespace M2MSystems.Insurance.WebService.Controllers
                     Message = "Non properly configured form - missing fee calculator."
                 };
             Response response;
-            if (validator.Validate(formsData, out response) == false)
-                return response;
             Application application;
-            if ((application = dataMapper.ExtractApplication(formsData, out response)) == null)
+            if ((application = applicationExtractor.ExtractApplication(request.FormsData, out response)) == null)
                 return response;
             var fee = feeCalculator.CalculateFee(application);
-            var answersJson = JsonConvert.SerializeObject(formsData);
-            using (db.Transaction = db.Connection.BeginTransaction())
+            var answersJson = JsonConvert.SerializeObject(request.FormsData); 
+            using (var transaction = new TransactionScope())
             {
                 try
                 {
@@ -81,6 +71,7 @@ namespace M2MSystems.Insurance.WebService.Controllers
                         applicant.city = application.City;
                         applicant.firstname = application.FirstName;
                         applicant.lastname = application.LastName;
+                        application.ThirdPartyKey = application.ThirdPartyKey;
                     }
                     else
                     {
@@ -91,33 +82,34 @@ namespace M2MSystems.Insurance.WebService.Controllers
                             city = application.City,
                             firstname = application.FirstName,
                             lastname = application.LastName,
+                            thirdpartykey = application.ThirdPartyKey,
                             email = application.Email
                         };
                         db.Applicants.InsertOnSubmit(applicant);   
                     }
-                    var policy = new Policy
-                    {
-                        cost = fee,
-                        Product = form.Product,
-                        enddate = application.EndDate,
-                        startdate = application.StartDate
-                    };
-                    db.Policies.InsertOnSubmit(policy);
-                    var savedForm = new SavedForm
-                    {
-                        answers = answersJson,
-                        Applicant = applicant,
-                        Form = form,
-                        Policy = policy,
-                    };
-                    applicant.SavedForms.Add(savedForm);
-                    policy.SavedForms.Add(savedForm);
-                    
-                    db.Transaction.Commit();
+                    //var policy = new Policy
+                    //{
+                    //    cost = fee,
+                    //    Product = form.Product,
+                    //    enddate = application.EndDate,
+                    //    startdate = application.StartDate
+                    //};
+                    //db.Policies.InsertOnSubmit(policy);
+                    //var savedForm = new SavedForm
+                    //{
+                    //    answers = answersJson,
+                    //    Applicant = applicant,
+                    //    Form = form,
+                    //    Policy = policy,
+                    //};
+                    //applicant.SavedForms.Add(savedForm);
+                    //policy.SavedForms.Add(savedForm);
+
+                    db.SubmitChanges();
+                    transaction.Complete();
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
-                    db.Transaction.Dispose();
                     return new Response
                     {
                         Ok = false,

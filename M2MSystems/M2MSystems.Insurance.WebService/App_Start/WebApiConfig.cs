@@ -6,18 +6,10 @@ namespace M2MSystems.Insurance.WebService
     {
         public static void Register(HttpConfiguration config)
         {
-            //name: "DefaultApi",
-            //routeTemplate: "api/{controller}/{id}",
-            //defaults: new { id = RouteParameter.Optional }
             config.Routes.MapHttpRoute(
-                "InsuranceGet",
-                "api/1/insurance/{partnerId}/{formId}",
-                new { controller = "InsuranceGet" }
-            );
-            config.Routes.MapHttpRoute(
-                "InsuranceSubmit",
-                "api/1/insurance/{partnerId}/{formId}/submit",
-                new { controller = "InsuranceSubmit" }
+                "InsuranceCheck",
+                "Forms/{partnerId}/{formId}/Check",
+                new { controller = "InsuranceCheck" }
             );
         }
     }

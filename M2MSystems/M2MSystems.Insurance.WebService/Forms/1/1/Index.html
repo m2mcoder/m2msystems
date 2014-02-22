@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
     <head>
-        <title>Insuarance form</title>
+        <title>Insurance form</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <script src="/Scripts/jquery-2.1.0.js" language="javascript"></script>
         <script type="text/javascript">
@@ -11,26 +11,27 @@
                 $.each(a, function () {
                     o.push({ Key: this.name, Value: this.value });
                 });
-                return o;
+                return { FormsData: o };
             };
             $(document).ready(function() {
                 var form = jQuery("#form");
                 form.bind("submit", function (e) {
                     e.preventDefault();
                     $.ajax({
-                        url: $(location).attr('href') + "/submit",
+                        url: $(location).attr('href') + "/check",
                         type: 'POST',
+                        contentType: "application/json; charset=utf-8",
                         dataType: 'json',
                         data: JSON.stringify(form.serializeObject()),
                         success: function(data) {
                             console.log(data);
-                            if (data.ok == false) {
-                                visualizeValidationResults(data.validationResults);
+                            if (data.Ok == false) {
+                                visualizeValidationResults(data.ValidationResults);
                             } else {
-                                visualizeQuote(data.quote);
+                                visualizeQuote(data.Fee);
                             }
                         },
-                        failure: function(data) {
+                        failure: function() {
                             visualizeValidationResults({
                                 commonError: "Unable get a quote at current time. Try again later."
                             });
@@ -42,11 +43,15 @@
         </script>
         <script language="javascript">
             function visualizeQuote(quote) {
-                
+                $("#results").html("Fee: " + quote);
             }
 
             function visualizeValidationResults(validationResults) {
-                
+                var text = "";
+                $.each(validationResults, function (i, item) {
+                    text += i + ". " + item.Value + "<br/>";
+                });
+                $("#results").html(text);
             }
         </script>
     </head>
@@ -64,14 +69,10 @@
                     </tr>
                     <tr>
                         <td colspan="3">
-                            Business name:
-                            <input name="busname" type="text" size="80" maxlength="200">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="3">
-                            Name of principal(s):
-                            <input name="pr_name" type="text" size="40" maxlength="200">
+                            First name:
+                            <input name="firstname" type="text" size="30" maxlength="200">
+                            Last name:
+                            <input name="lastname" type="text" size="30" maxlength="200">
                         </td>
                     </tr>
                     <tr>
@@ -96,51 +97,51 @@
                     <tr>
                         <td colspan="3">
                             Full Description of your work and products:      <select name="descr" size="1">
-                                <option>Select</option>
-                                <option>
-                                    Drawings
-                                    and Paintings
-                                </option>
-                                <option>Sculptures/Installation</option>
-                                <option>Mixed Media</option>
-                                <option>
-                                    Digital
-                                    Media
-                                </option>
-                                <option>Graphic Arts</option>
-                                <option>Printmaking</option>
-                                <option>Metalsmithing</option>
-                                <option>Fiber, Apparel</option>
-                                <option>
-                                    Ceramic, Clay,
-                                    Pottery
-                                </option>
-                                <option>Glass Blowers</option>
-                                <option>Paper Art</option>
-                                <option>Fabric Art</option>
-                                <option>Floral Art</option>
-                                <option>Folk Art</option>
-                                <option>Doll makers</option>
-                                <option>Leatherwork</option>
-                                <option>Calligraphy</option>
-                                <option>Mosaic</option>
-                                <option>Basket making</option>
-                                <option>Wood</option>
-                                <option>Furniture making</option>
-                                <option>
-                                    Scrapbooking
-                                    Products
-                                </option>
-                                <option>Soap makers</option>
-                                <option>Lotion makers</option>
-                                <option>Candle makers</option>
-                                <option>Photographers</option>
-                                <option>
-                                    Costume Jewelry and
-                                    Beading
-                                </option>
-                                <option>Other</option>
-                            </select>
+                                                                                 <option>Select</option>
+                                                                                 <option>
+                                                                                     Drawings
+                                                                                     and Paintings
+                                                                                 </option>
+                                                                                 <option>Sculptures/Installation</option>
+                                                                                 <option>Mixed Media</option>
+                                                                                 <option>
+                                                                                     Digital
+                                                                                     Media
+                                                                                 </option>
+                                                                                 <option>Graphic Arts</option>
+                                                                                 <option>Printmaking</option>
+                                                                                 <option>Metalsmithing</option>
+                                                                                 <option>Fiber, Apparel</option>
+                                                                                 <option>
+                                                                                     Ceramic, Clay,
+                                                                                     Pottery
+                                                                                 </option>
+                                                                                 <option>Glass Blowers</option>
+                                                                                 <option>Paper Art</option>
+                                                                                 <option>Fabric Art</option>
+                                                                                 <option>Floral Art</option>
+                                                                                 <option>Folk Art</option>
+                                                                                 <option>Doll makers</option>
+                                                                                 <option>Leatherwork</option>
+                                                                                 <option>Calligraphy</option>
+                                                                                 <option>Mosaic</option>
+                                                                                 <option>Basket making</option>
+                                                                                 <option>Wood</option>
+                                                                                 <option>Furniture making</option>
+                                                                                 <option>
+                                                                                     Scrapbooking
+                                                                                     Products
+                                                                                 </option>
+                                                                                 <option>Soap makers</option>
+                                                                                 <option>Lotion makers</option>
+                                                                                 <option>Candle makers</option>
+                                                                                 <option>Photographers</option>
+                                                                                 <option>
+                                                                                     Costume Jewelry and
+                                                                                     Beading
+                                                                                 </option>
+                                                                                 <option>Other</option>
+                                                                             </select>
                         </td>
                     </tr>
                     <tr>
@@ -168,9 +169,9 @@
                                 POLICY
                                 LIMITS
                             </span>    	 <span style="font-weight: bold;">
-                                Please Select Desired
-                                Coverage Limits below:
-                            </span>
+                                       	     Please Select Desired
+                                       	     Coverage Limits below:
+                                       	 </span>
                         </td>
                     </tr>
                     <tr>
@@ -310,5 +311,8 @@
                 </tbody>
             </table>
         </form>
+        <div id="results">
+            
+        </div>
 </body>
 </html>

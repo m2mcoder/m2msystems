@@ -17,7 +17,7 @@
     <Type Name="Document">
       <Column Name="id" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="bin" Storage="_url" Type="System.Byte[]" DbType="VARBINARY(MAX)" CanBeNull="false" />
-      <Association Name="Form_Document" Member="Form" ThisKey="id" OtherKey="documentid" Type="Form" IsForeignKey="true" />
+      <Association Name="Policy_Document" Member="Policy" ThisKey="id" OtherKey="documentid" Type="Policy" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Forms" Member="Forms">
@@ -25,11 +25,10 @@
       <Column Name="id" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="productid" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="title" Type="System.String" DbType="NVarChar(200) NOT NULL" CanBeNull="false" />
-      <Column Name="documentid" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
-      <Column Name="datamapper" Type="System.String" DbType="varchar(50)" CanBeNull="false" />
+      <Column Name="applicationextractor" Storage="_datamapper" Type="System.String" DbType="varchar(50)" CanBeNull="false" />
       <Column Name="validator" Type="System.String" DbType="varchar(50)" CanBeNull="false" />
       <Column Name="feecalculator" Type="System.String" DbType="varchar(50)" CanBeNull="false" />
-      <Association Name="Form_Document" Member="Documents" ThisKey="documentid" OtherKey="id" Type="Document" />
+      <Column Name="url" Type="System.String" DbType="varchar(200)" CanBeNull="false" />
       <Association Name="Form_SavedForm" Member="SavedForms" ThisKey="id" OtherKey="formid" Type="SavedForm" />
       <Association Name="Product_Form" Member="Product" ThisKey="productid" OtherKey="id" Type="Product" IsForeignKey="true" />
     </Type>
@@ -78,6 +77,7 @@
       <Column Name="startdate" Type="System.DateTimeOffset" DbType="DateTimeOffset NOT NULL" CanBeNull="false" />
       <Column Name="enddate" Type="System.DateTimeOffset" DbType="DateTimeOffset NOT NULL" CanBeNull="false" />
       <Column Name="cost" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Association Name="Policy_Document" Member="Documents" ThisKey="documentid" OtherKey="id" Type="Document" />
       <Association Name="Policy_Product" Member="Product" ThisKey="id" OtherKey="id" Type="Product" Cardinality="One" />
       <Association Name="Policy_SavedForm" Member="SavedForms" ThisKey="id" OtherKey="policyid" Type="SavedForm" />
     </Type>

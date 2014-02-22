@@ -1,4 +1,4 @@
-namespace M2MSystems.Insurance.WebService.Controllers.InsuranceSubmit.Models
+namespace M2MSystems.Insurance.WebService.Controllers.InsuranceCheck.Models
 {
     public class KeyValue
     {
