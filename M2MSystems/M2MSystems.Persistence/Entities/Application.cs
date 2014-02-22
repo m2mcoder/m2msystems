@@ -1,6 +1,6 @@
 using System;
 
-namespace M2MSystems.Insurance.WebService.Controllers.InsuranceCheck.Models
+namespace M2MSystems.DataAccess.Entities
 {
     public class Application
     {

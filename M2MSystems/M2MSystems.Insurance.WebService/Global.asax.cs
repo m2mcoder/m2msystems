@@ -1,5 +1,6 @@
 ﻿using System.Web.Http;
 using System.Web.Mvc;
+using M2MSystems.Insurance.WebService.Endpoints;
 
 namespace M2MSystems.Insurance.WebService
 {

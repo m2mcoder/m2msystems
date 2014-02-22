@@ -1,6 +1,6 @@
-using M2MSystems.Insurance.WebService.Controllers.InsuranceCheck.Models;
+using M2MSystems.DataAccess.Entities;
 
-namespace M2MSystems.Insurance.WebService.Controllers.InsuranceCheck.InsuranceTypes.ArtInsurance
+namespace M2MSystems.Insurance.WebService.Endpoints.Controllers.InsuranceCheck.InsuranceTypes.ArtInsurance
 {
     public class ArtInsuranceFeeCalculator : IFeeCalculator
     {

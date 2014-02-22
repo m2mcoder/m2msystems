@@ -3,9 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30110.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "M2MSystems.Database", "M2MSystems.Database\M2MSystems.Database.csproj", "{BA342599-A394-488C-9674-14474B5792C1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "M2MSystems.Persistence", "M2MSystems.Persistence\M2MSystems.Persistence.csproj", "{A99EF118-4AF1-4E3D-88F1-FE461A426111}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "M2MSystems.Persistence.Linq2Sql", "M2MSystems.Persistence.Linq2Sql\M2MSystems.Persistence.Linq2Sql.csproj", "{BA342599-A394-488C-9674-14474B5792C1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "M2MSystems.Insurance.WebService", "M2MSystems.Insurance.WebService\M2MSystems.Insurance.WebService.csproj", "{49A0C6CB-3429-42C3-850B-7789214D668C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "M2MSystems.Insurance.WebService.Endpoints", "M2MSystems.Insurance.WebService.Endpoints\M2MSystems.Insurance.WebService.Endpoints.csproj", "{F354AB78-68BE-4D4D-8BBB-3597B3D0A0EA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{49A0C6CB-3429-42C3-850B-7789214D668C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{49A0C6CB-3429-42C3-850B-7789214D668C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{49A0C6CB-3429-42C3-850B-7789214D668C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A99EF118-4AF1-4E3D-88F1-FE461A426111}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A99EF118-4AF1-4E3D-88F1-FE461A426111}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A99EF118-4AF1-4E3D-88F1-FE461A426111}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A99EF118-4AF1-4E3D-88F1-FE461A426111}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F354AB78-68BE-4D4D-8BBB-3597B3D0A0EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F354AB78-68BE-4D4D-8BBB-3597B3D0A0EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F354AB78-68BE-4D4D-8BBB-3597B3D0A0EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F354AB78-68BE-4D4D-8BBB-3597B3D0A0EA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

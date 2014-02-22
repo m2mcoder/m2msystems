@@ -1,8 +1,9 @@
 using System.Collections.Generic;
-using M2MSystems.Insurance.WebService.Controllers.InsuranceCheck.InsuranceTypes.ArtInsurance;
-using M2MSystems.Insurance.WebService.Controllers.InsuranceCheck.Models;
+using M2MSystems.DataAccess.Entities;
+using M2MSystems.Insurance.WebService.Endpoints.Controllers.InsuranceCheck.InsuranceTypes.ArtInsurance;
+using M2MSystems.Insurance.WebService.Endpoints.Controllers.InsuranceCheck.Models;
 
-namespace M2MSystems.Insurance.WebService.Controllers.InsuranceCheck
+namespace M2MSystems.Insurance.WebService.Endpoints.Controllers.InsuranceCheck
 {
     public interface IApplicationExtractorsManager
     {

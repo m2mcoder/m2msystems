@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace M2MSystems.Insurance.WebService
+namespace M2MSystems.Insurance.WebService.Endpoints
 {
     public class FilterConfig
     {

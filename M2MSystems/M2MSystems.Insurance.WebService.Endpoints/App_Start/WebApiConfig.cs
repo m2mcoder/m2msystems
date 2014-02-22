@@ -1,6 +1,6 @@
 ﻿using System.Web.Http;
 
-namespace M2MSystems.Insurance.WebService
+namespace M2MSystems.Insurance.WebService.Endpoints
 {
     public static class WebApiConfig
     {

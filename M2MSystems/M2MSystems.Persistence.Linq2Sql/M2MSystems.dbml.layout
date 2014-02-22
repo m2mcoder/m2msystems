@@ -14,10 +14,10 @@
         <elementListCompartment Id="0328a2de-0fb9-45e3-9dcc-c306f11b4c5f" absoluteBounds="6.2650000000000006, 4.7100000000000009, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="b7708926-aa1e-4585-88c6-5b8b1498b092" absoluteBounds="6.25, 5.875, 2, 2.1554996744791666">
+    <classShape Id="b7708926-aa1e-4585-88c6-5b8b1498b092" absoluteBounds="6.25, 5.875, 2, 1.9631982421874996">
       <DataClassMoniker Name="/M2MSystemsDataContext/Form" />
       <nestedChildShapes>
-        <elementListCompartment Id="188a6c14-e4d0-4257-bca6-3c0310697da4" absoluteBounds="6.2650000000000006, 6.3350000000000009, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="188a6c14-e4d0-4257-bca6-3c0310697da4" absoluteBounds="6.2650000000000006, 6.3350000000000009, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
     <classShape Id="70e8f777-3147-4538-b790-e5e1ca40a186" absoluteBounds="3.5, 6, 2, 1.5785953776041666">
@@ -83,7 +83,7 @@
         <classShapeMoniker Id="09462cec-17c3-40eb-b2ab-70380f42229c" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.59375 : 4.69399251302083); (5.59375 : 7.83579752604167); (6.25 : 7.83579752604167)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.59375 : 4.69399251302083); (5.59375 : 7.73964680989583); (6.25 : 7.73964680989583)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/M2MSystemsDataContext/Product/Product_Form" />
       <nodes>
         <classShapeMoniker Id="cdb25c50-ffc4-44c9-aebf-8ba6c5e03e79" />
@@ -111,7 +111,7 @@
         <classShapeMoniker Id="fe731863-94d8-4ba0-bb5a-4741fd8ba6f3" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(8.25 : 6.88544840494792); (9.125 : 6.88544840494792)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(8.25 : 6.88544840494792); (9.125 : 6.88544840494792)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/M2MSystemsDataContext/Form/Form_SavedForm" />
       <nodes>
         <classShapeMoniker Id="b7708926-aa1e-4585-88c6-5b8b1498b092" />

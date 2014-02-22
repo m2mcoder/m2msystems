@@ -9,7 +9,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace M2MSystems.Database
+namespace M2MSystems.Access.Linq2Sql
 {
 	using System.Data.Linq;
 	using System.Data.Linq.Mapping;
@@ -225,7 +225,7 @@ namespace M2MSystems.Database
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="BigInt NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="BigInt NOT NULL", IsPrimaryKey=true, IsDbGenerated=true)]
 		public long id
 		{
 			get
@@ -459,7 +459,7 @@ namespace M2MSystems.Database
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="BigInt NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="BigInt NOT NULL", IsPrimaryKey=true, IsDbGenerated=true)]
 		public long id
 		{
 			get
@@ -572,8 +572,6 @@ namespace M2MSystems.Database
 		
 		private string _datamapper;
 		
-		private string _validator;
-		
 		private string _feecalculator;
 		
 		private string _url;
@@ -594,8 +592,6 @@ namespace M2MSystems.Database
     partial void OntitleChanged();
     partial void OnapplicationextractorChanging(string value);
     partial void OnapplicationextractorChanged();
-    partial void OnvalidatorChanging(string value);
-    partial void OnvalidatorChanged();
     partial void OnfeecalculatorChanging(string value);
     partial void OnfeecalculatorChanged();
     partial void OnurlChanging(string value);
@@ -689,26 +685,6 @@ namespace M2MSystems.Database
 					this._datamapper = value;
 					this.SendPropertyChanged("applicationextractor");
 					this.OnapplicationextractorChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_validator", DbType="varchar(50)", CanBeNull=false)]
-		public string validator
-		{
-			get
-			{
-				return this._validator;
-			}
-			set
-			{
-				if ((this._validator != value))
-				{
-					this.OnvalidatorChanging(value);
-					this.SendPropertyChanging();
-					this._validator = value;
-					this.SendPropertyChanged("validator");
-					this.OnvalidatorChanged();
 				}
 			}
 		}
@@ -1595,7 +1571,7 @@ namespace M2MSystems.Database
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="BigInt NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="BigInt NOT NULL", IsPrimaryKey=true, IsDbGenerated=true)]
 		public long id
 		{
 			get
@@ -2044,7 +2020,7 @@ namespace M2MSystems.Database
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="BigInt NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="BigInt NOT NULL", IsPrimaryKey=true, IsDbGenerated=true)]
 		public long id
 		{
 			get

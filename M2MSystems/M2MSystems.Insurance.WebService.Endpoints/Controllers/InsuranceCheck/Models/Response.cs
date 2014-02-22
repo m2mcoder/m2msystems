@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace M2MSystems.Insurance.WebService.Controllers.InsuranceCheck.Models
+namespace M2MSystems.Insurance.WebService.Endpoints.Controllers.InsuranceCheck.Models
 {
     public class Response
     {
