@@ -51,12 +51,12 @@ namespace M2MSystems.Insurance.WebService.Endpoints.Controllers
                 return response;
             var fee = feeCalculator.CalculateFee(application);
             var answersJson = JsonConvert.SerializeObject(request.FormsData);
-            if (_applicantsUpdater.Update(application))
-            return new Response
-            {
-                Ok = false,
-                Message = "Unable to save form at the current time. Try again later."
-            };
+            if (_applicantsUpdater.Update(application) == false)
+                return new Response
+                {
+                    Ok = false,
+                    Message = "Unable to save form at the current time. Try again later."
+                };
             return new Response { Ok = true, Fee = fee };
         }
     }
